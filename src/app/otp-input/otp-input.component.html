@@ -1,0 +1,19 @@
+<div class="otp-container" role="group" aria-label="OTP input">
+  <input
+    #otpInput
+    *ngFor="let item of otpValues; let i = index"
+    [type]="mask ? 'password' : type"
+    [class.filled]="otpValues[i]"
+    [class.error]="!!errorMessage"
+    maxlength="1"
+    inputmode="numeric"
+    pattern="[0-9]*"
+    autocomplete="one-time-code"
+    (input)="handleInput($event, i)"
+    (keydown)="handleBackspace($event, i)"
+    (paste)="handlePaste($event)"
+    [attr.aria-label]="'Digit ' + (i + 1)"
+  />
+</div>
+<p class="error-message" *ngIf="errorMessage" role="alert">{{ errorMessage }}</p>
+  
